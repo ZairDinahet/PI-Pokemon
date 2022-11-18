@@ -1,0 +1,29 @@
+.navbar{
+  display: flex;
+  justify-content: space-between;
+  padding: 0 125px;
+  align-items: center;
+  background-color: gray;
+  color: white;
+}
+
+.navbar-links-container {
+  display: flex;
+  justify-content: space-between;
+  width: 15vw;
+}
+
+.navbar-li{
+  list-style: none;
+  
+}
+
+.navbar-link {
+  text-decoration: none;
+  font-weight: bold;
+  color: white;
+}
+
+.active{
+  color: black
+}

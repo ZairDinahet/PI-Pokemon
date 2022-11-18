@@ -1,5 +1,6 @@
 const { Router } = require('express');
 const getAllPokemons = require('../controllers/getPokemons');
+const postPokemon = require('../controllers/postPokemon');
 const {Pokemon, Type} = require('../db');
 // traerme mis funciones controladoras get de la carpeta controllers
 const router = Router();
@@ -44,32 +45,36 @@ router.get('/:id', async (req, res) => {
 
 // Creo mi pokemon y hago mi relacion con la tabla type 
 router.post('/', async (req, res) => {
-  const { name, hp, attack, defense, speed, height, weight, type, img } = req.body;
+  const { name, hp, attack, defense, speed, height, weight, types, img } = req.body;
   if(!name) return res.status(400).send('Mandatory data missing')
+  
   try {
-    const [newPokemon, created] = await Pokemon.findOrCreate({ 
-      where: {name: name},
-      defaults: {
-        name,
-        hp,
-        attack,
-        defense,
-        speed,
-        height,
-        weight,
-        img,
-      }
-    })
-    if(created) {
-      const relation = await Type.findAll({
-        where: {name: type}
-      })
-      newPokemon.addTypes(relation)
-      res.status(200).send("Successfully created Pokemon") 
-    } else {
-      res.status(404).send("The name you are trying to use is already taken");
-    }
-
+    const newPokemon = await postPokemon(req.body);
+    newPokemon ? 
+    res.status(200).send("Successfully created Pokemon") :
+    res.status(404).send("The name you are trying to use is already taken");
+  // const [newPokemon, created] = await Pokemon.findOrCreate({ 
+  //   where: {name: name},
+  //   defaults: {
+  //     name,
+  //     hp,
+  //     attack,
+  //     defense,
+  //     speed,
+  //     height,
+  //     weight,
+  //     img,
+  //   }
+  // })
+  // if(created) {
+  //   const relation = await Type.findAll({
+  //     where: {name: type}
+  //   })
+  //   newPokemon.addTypes(relation)
+  //   res.status(200).send("Successfully created Pokemon") 
+  // } else {
+  //   res.status(404).send("The name you are trying to use is already taken");
+  // }
   } catch (error) {
     res.status(400).send(error);
   }

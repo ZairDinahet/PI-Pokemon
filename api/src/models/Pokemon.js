@@ -33,10 +33,9 @@ module.exports = (sequelize) => {
       type: DataTypes.INTEGER,
     },
     img: {
-      type: DataTypes.STRING,
-      defaultValue: 'https://w7.pngwing.com/pngs/223/715/png-transparent-poke-ball-thumbnail.png'
+      type: DataTypes.STRING(1000),
     },
-    create: {
+    created: {
       type: DataTypes.BOOLEAN,
       defaultValue: true,
     }

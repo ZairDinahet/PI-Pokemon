@@ -3,7 +3,7 @@ const { Pokemon, Type } = require('../db');
 
 const getAllPokemons = async () => {
   // traigo los pokemones de la api y los filtro
-  const numPokemons = 150;
+  const numPokemons = 40;
   let apiPokemons = await axios.get(`https://pokeapi.co/api/v2/pokemon?limit=${numPokemons}`)
   apiPokemons = apiPokemons.data.results.map(p => axios.get(p.url))
   apiPokemons = await axios.all(apiPokemons)
@@ -17,13 +17,13 @@ const getAllPokemons = async () => {
       speed: p.data.stats[5].base_stat,
       height: p.data.height,
       weight: p.data.weight,
-      type: p.data.types.map(t => t.type.name),
+      types: p.data.types.map(t => t.type.name),
       img: p.data.sprites.other.home.front_default,
-      create: false,
+      created: false,
     }
   })
   
-  const dbPokemons = await Pokemon.findAll({
+  let dbPokemons = await Pokemon.findAll({
     include: {
       model: Type,
       attributes: ['name'],
@@ -32,8 +32,16 @@ const getAllPokemons = async () => {
       }
     }
   });
+
+  dbPokemons = dbPokemons?.map(p => {
+    pokeMapeo = {
+      ...p.dataValues,
+      types: p.types.map(t => t.name)
+    }
+    return pokeMapeo;
+  }) 
   
-  const allPokemons = [...apiPokemons, ...dbPokemons]
+  const allPokemons = [...dbPokemons, ...apiPokemons]
 
   return allPokemons;
 }

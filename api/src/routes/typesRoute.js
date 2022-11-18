@@ -12,7 +12,7 @@ router.get('/', async (req, res) => {
     res.status(200).send(allTypes);
 
   } catch (error) {
-    res.status(400).send("error")
+    res.status(400).send(error)
   }
 })
 
