@@ -1,12 +1,18 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import landing from '../../Img/landing.jpg';
+import './LandingPage.css';
 
 
 function LandingPage () {
   return (
-    <div>
-      <img src="https://www.todofondos.net/wp-content/uploads/1680x1050-Pokemon-Pikachu-Clip-Art-Wallpaper-Minimalismo-Pixel-Art-%E2%80%A2-Fondo-de-pantalla-para-usted.jpg" alt="LAnding Page Pikachu" />
-      <NavLink to = '/home'>Ingresar al Pokedex</NavLink>
+    <div className='container-landing'>
+      <img src={landing} alt="" className='landing' />
+      <NavLink to = '/pokemons'>
+        <button className='button-landing'>
+          <h3>Start Pokedex</h3> 
+        </button>
+      </NavLink>
     </div>
   )
 };

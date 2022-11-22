@@ -5,7 +5,8 @@ import {
   GET_DETAILS,
   FILTER_TYPES,
   FILTER_ORIGIN,
-  FILTER_ORDER
+  FILTER_ORDER,
+  SET_ERROR
   
 } from "./actions";
 
@@ -14,13 +15,13 @@ const initialState = {
   pokemonsCopy: [],
   types: [],
   detail: [],
-  loading: false,
-  page: 1,
+  error: false,
 }
 
 
 function rootReducer (state = initialState, action){
   switch(action.type){
+
     case GET_ALL_POKEMONS:
       return {
         ...state,
@@ -63,24 +64,46 @@ function rootReducer (state = initialState, action){
       }
     
     case FILTER_ORDER:
-      let pokemones  = [...state.pokemonsCopy];
+      let pokemones  = [...state.pokemons];
 
       if(action.payload === 'asc') pokemones.sort((a, b) => { 
-          if(a.name > b.name) return 1;
-          if(a.name < b.name) return -1;
+          const aPokemon =  a.name.toLowerCase();
+          const bPokemon =  b.name.toLowerCase()
+          if(aPokemon > bPokemon) return 1;
+          if(aPokemon < bPokemon) return -1;
           return 0;
         });
       if(action.payload === 'desc') pokemones.sort((a, b) => { 
-          if(a.name > b.name) return -1;
-          if(a.name < b.name) return 1;
-          return 0;
+        const aPokemon =  a.name.toLowerCase();
+        const bPokemon =  b.name.toLowerCase()
+        if(aPokemon > bPokemon) return -1;
+        if(aPokemon < bPokemon) return 1;
+        return 0;
         })
+    //   if(action.payload === 'asc') pokemones.sort((a, b) => { 
+
+    //     if(a.name > b.name) return 1;
+    //     if(a.name < b.name) return -1;
+    //     return 0;
+    //   });
+    // if(action.payload === 'desc') pokemones.sort((a, b) => { 
+
+    //   if(a.name > b.name) return -1;
+    //   if(a.name < b.name) return 1;
+    //   return 0;
+    //   })
       if(action.payload === 'strong') pokemones.sort((a, b) => b.attack - a.attack)
       if(action.payload === 'weak') pokemones.sort((a, b) => a.attack - b.attack)
       return{
         ...state,
         pokemons: pokemones
       }
+
+    case SET_ERROR:
+      return {
+        ...state,
+        error: action.payload,
+      };
 
     default:
       return {

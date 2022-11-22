@@ -1,29 +1,105 @@
 .navbar{
   display: flex;
-  justify-content: space-between;
-  padding: 0 125px;
+  justify-content:center;
+  flex-direction: row-reverse;
   align-items: center;
-  background-color: gray;
-  color: white;
+  padding-top: 10px ;
 }
 
-.navbar-links-container {
+.input {
+  width: 200px;
+  height: 25px;
+  padding: 5px;
+  border: none;
+  border-radius: 15px;
+}
+
+.button-search {
+  background-color: rgba(0, 66, 68, 1);
+  border-radius: 20px;
+  border: none;
+  height: 30px;
+  width: 30px;
+  margin: 5px;
+  cursor: pointer;
+  position: relative;
+  left: 260px;
+  top: 8px;
+}
+
+.button-refresh{
+  background-color: rgba(0, 66, 68, 1);
+  border-radius: 20px; 
+  height: 30px;
+  width: 30px;
+  border: none;
+  cursor: pointer;
   display: flex;
-  justify-content: space-between;
-  width: 15vw;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  left: 620px;
+  top: 4px;
 }
 
-.navbar-li{
-  list-style: none;
-  
+
+.button-create-link{
+  border-radius: 20px;
+  margin: 5px;
+  height: 30px;
+  width: 30px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  left: 700px;
+  top: 5px ;
 }
 
-.navbar-link {
-  text-decoration: none;
-  font-weight: bold;
+/* .button-search:hover{
+  background-color:rgba(43, 43, 43, 1);
+  transition: all 1s;
+}
+.button-refresh:hover{
+  background-color: rgba(43, 43, 43, 1);
+  transition: all 1s;
+}
+.button-create-link:hover{
+  background-color: rgba(43, 43, 43, 1);
+  transition: all 1s;
+} */
+
+.title-pokedex {
+  font-family:Arial, Helvetica, sans-serif;
+  font-size: 35px;
   color: white;
+  padding-top: 10px;
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  position: absolute;
+  left: 50px;
 }
 
-.active{
-  color: black
+.search{
+  height: 25px;
+  width: 25px;
+
 }
+.refresh {
+  height: 35px;
+  width: 35px;
+}
+
+.crate-link {
+  height: 42px;
+  width: 42px;
+}
+
+.pokeball-img {
+  height: 22px;
+}
+
+

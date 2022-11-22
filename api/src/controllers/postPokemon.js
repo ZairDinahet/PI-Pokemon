@@ -1,7 +1,7 @@
 const { Pokemon, Type } = require('../db');
 
 const postPokemon = async ({name, hp, attack, defense, speed, height, weight, types, img}) => {
-  if(!img.length) img = "https://freepngimg.com/thumb/pokemon/37603-9-pokeball.png"
+  if(!img || !img.length) img = "https://freepngimg.com/thumb/pokemon/37603-9-pokeball.png"
   const [newPokemon, created] = await Pokemon.findOrCreate({ 
     where: {name: name},
     defaults: {
@@ -12,7 +12,7 @@ const postPokemon = async ({name, hp, attack, defense, speed, height, weight, ty
       speed,
       height,
       weight,
-      img: img
+      img,
     }
   })
   if(created) {

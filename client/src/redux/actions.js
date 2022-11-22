@@ -8,10 +8,9 @@ export const POST_POKEMON = "POST_POKEMON";
 export const FILTER_TYPES = "FILTER_TYPES";
 export const FILTER_ORIGIN = "FILTER_ORIGIN";
 export const FILTER_ORDER = "FILTER_ORDER";
+export const SET_ERROR = "SET_ERROR";
 
 export const RESET = "RESET";
-export const ERROR = "ERROR";
-
 
 
 
@@ -25,7 +24,8 @@ export const getAllPokemons = () => {
       })
     } catch (error) {
       return dispatch({
-        type: ERROR,
+        type: SET_ERROR,
+        payload: true,
       })
     }
   }
@@ -41,7 +41,8 @@ export const getAllTypes = () => {
       })
     } catch (error) {
       return dispatch({
-        type: ERROR,
+        type: SET_ERROR,
+        payload: true,
       })
     }
   }
@@ -57,7 +58,8 @@ export const getPokemonByName = (name) => {
       })
     } catch (error) {
       return dispatch({
-        type: ERROR,
+        type: SET_ERROR,
+        payload: true,
       })
     }
   }
@@ -77,7 +79,7 @@ export const postPokemon = (payload) => {
       return info;
     } catch (error) {
       return dispatch({
-        type: ERROR,
+        type: SET_ERROR,
       })
     }
   }
@@ -101,6 +103,13 @@ export const filterByOrder = (order) => {
   return {
     type: FILTER_ORDER,
     payload: order
+  }
+}
+
+export const setError = (payload) => {
+  return {
+    type: SET_ERROR,
+    payload: payload,
   }
 }
 export const resetPokemons = () => {

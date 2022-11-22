@@ -1,17 +1,20 @@
 import React, {useEffect, useState } from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import { getAllPokemons, getAllTypes, filterByTypes, filterByOrigin, filterByOrder} from '../../redux/actions';
-import {NavLink} from "react-router-dom"
-import Card from '../Card/Card.jsx'
+import {NavLink} from "react-router-dom";
+import Card from '../Card/Card';
 import SearchBar from '../SearchBar/SearchBar';
-import Paginado from '../Paginado/Paginado.jsx'
-import './Home.css'
+import Paginado from '../Paginado/Paginado';
+import Error from '../Error/Error';
+import loading from '../../Img/Oscuro.gif';
+import './Home.css';
 
 function Home () {
 
 const dispatch = useDispatch();
 const pokemons = useSelector(state => state.pokemons);
 const types = useSelector(state => state.types);
+const error = useSelector(state => state.error);
 const [currentPage, setCurrentPage] = useState(1);
 const [pokemonPerPage] = useState(12);
 const indexOfLastPokemon = currentPage * pokemonPerPage;
@@ -43,54 +46,54 @@ const handleFilterByOrder = (e) => {
   setCurrentPage(1)
 }
 
-const handlePokemons = () => {
-  dispatch(getAllPokemons())
-}
 
 
   return(
-    <>
-          <SearchBar/>
-      <Paginado pokemonPerPage={pokemonPerPage} pokemons = {pokemons.length} paginado = {paginado}/>
+    <div className='container-home'>
+      <div className='NavBar'>
 
-      <button onClick={() => handlePokemons()}>Reset</button>
+        <SearchBar/>        
 
-      <div>
-        <select onChange={e => handleFilterByTypes(e)}>
-          <option value="All" key= "all" selected>Type</option>
-          {types.map(t => <option value = {t.name} key={t.id} >{t.name} </option>)}
-        </select>
       </div>
 
-      <div>
-        <select onChange={e => handleFilterByOrder(e)}>
-          <option value="default" selected>All</option>
+      <div className='container-filters'> 
+        <select onChange={e => handleFilterByTypes(e)} className = "item-filter">
+          <option value="All" key= "all" selected>Type</option>
+          {types.map(t => <option value = {t.name} key={t.id} >{t.name[0].toUpperCase() +  t.name.slice(1)} </option>)}
+        </select>
+
+        <select onChange={e => handleFilterByOrder(e)} className = "item-filter">
+          <option value="default" selected>Order</option>
           <option value="asc">A-Z</option>
           <option value="desc">Z-A</option>
           <option value="strong">Strong</option>
           <option value="weak">Weak</option>
         </select>
-      </div>
 
-      <div>
-        <select onChange={ e => handleFilterByOrigin(e)}>
+        <select onChange={ e => handleFilterByOrigin(e)} className = "item-filter">
           <option value="All" selected>All</option>
           <option value="exiting">Exiting</option>
           <option value="created">Created</option>
         </select>
       </div>
-
-      <div className="container-pokemon">
-
-        <div className= "container-home">
-          {currentPokemons?.map(p => 
-          <NavLink to ={/pokemons/+ p.id} key= {p.id}>
-            <Card key = {p.id} name = {p.name} type = {p.types.join(' - ')} img = {p.img} />
-          </NavLink>)}
-          </div>
-      </div>
-    </>
-
+      
+        {error? <Error/> :
+          <>
+            <div className= "container-cards">
+            {currentPokemons.length? 
+            (currentPokemons.map(p => 
+            <NavLink to ={/pokemons/+ p.id} key= {p.id} className = "item-cards">
+              <Card key = {p.id} name = {p.name} type = {p.types.map(t => t[0].toUpperCase() +  t.slice(1)).join(' - ')} img = {p.img} />
+            </NavLink>)) :
+            (<div>
+              <img src={loading} alt="Ganger" />
+            </div>)
+            }
+            </div>
+            <Paginado pokemonPerPage={pokemonPerPage} pokemons = {pokemons.length} paginado = {paginado}/>
+          </>
+        }
+    </div>
   )
 }
 

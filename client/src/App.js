@@ -1,17 +1,17 @@
 import { Route } from 'react-router-dom';
 import './App.css';
 import Home from './components/Home/Home.jsx';
-// import LandingPage from './components/LandingPage/LandingPage.jsx';
-import Form from './components/CreatePokemon/Form.jsx';
+import LandingPage from './components/LandingPage/LandingPage.jsx';
+import Form from './components/Form/Form.jsx';
 import Detail from './components/Details/Detail.jsx';
 
 function App() {
   return (
     <div className="App">
-      {/* <Route exact path = '/'>
-        <LandingPage/>
-      </Route> */}
       <Route exact path = '/'>
+        <LandingPage/>
+      </Route>
+      <Route exact path = '/pokemons'>
         <Home/>
       </Route>
       <Route exact path = '/pokemons/create'>

@@ -1,0 +1,125 @@
+.form_container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height:70vh;
+  position: relative;
+  /* font-family: sans-serif; */
+  /* text-decoration: none; */
+}
+
+.form{
+  background-color: rgba(200, 199, 199, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 500px;
+  height: 750px;
+  padding: 1rem;
+  margin: 1rem;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 2px 2px 2px rgba(0,0,0,0.2);
+}
+
+.input-form {
+  height: 25px;
+  margin: 5px;
+  border: 1px solid black;
+  border-radius: 50px;
+}
+
+label{
+  align-self: center;
+  font-size: 15px;
+}
+
+
+select{
+  margin: 20px;
+  width: 200px;
+  height: 30px;
+  border-radius: 50px;
+}
+
+
+.danger {
+  font-family: "Rubik", sans-serif;
+  font-size: 12px;
+  font-weight: 100;
+  display: flex;
+  flex-wrap: nowrap;
+  margin-top: 0px;
+  margin-bottom: 15px;
+  color: #eb544d;
+}
+
+
+.link-back-form{
+  font-family: "Rubik", sans-serif;
+  font-size: 15px;
+  width: 160px;
+  height: 90px;
+  padding: 9px;
+  background-color: gray;
+  color: white;
+  box-shadow: 0 2px 2px 2px rgba(0,0,0,0.2);
+  border-radius: 50px;
+  text-decoration: none;
+  position: relative;
+  right: 750px;
+  top: 15px;
+
+}
+
+.link-back-form:hover {
+  background-color: rgba(43, 43, 43, 1);
+  color: white;
+  transition: all 0.5s;
+}
+.button-create{
+  color: white;
+  width: 150px;
+  padding: 10px;
+  border: none;
+  border-radius: 50px;
+  box-shadow: 0 2px 2px 2px rgba(0,0,0,0.2);
+  background-color: gray;
+  font-weight: bold
+}
+
+.button-create:hover {
+  background-color: rgba(43, 43, 43, 1);
+  transition: all 0.5s;
+}
+
+.profesor {
+  width: 360px;
+  height: 650px;
+  position: absolute;
+  right: 390px;
+}
+
+.list-types {
+  display: flex ;
+  flex-direction: column;
+  position: relative;
+  width: 90px;
+  margin: 5px;
+  color: black;
+  text-decoration: none;
+  border: none;
+  border-radius: 20px;
+}
+
+.bottom-delete {
+  position: absolute;
+  left: 100px;
+  top: 5px;
+  border: none;
+  background-color: gray;
+  color: white;
+  border-radius: 10px;
+  width: 20px;
+}
+

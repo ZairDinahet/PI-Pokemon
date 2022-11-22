@@ -10,7 +10,7 @@ const getAllPokemons = async () => {
   apiPokemons = apiPokemons.map(p => {
     return {
       id: p.data.id,
-      name: p.data.name,
+      name: p.data.name[0].toUpperCase() +  p.data.name.slice(1),
       hp: p.data.stats[0].base_stat,
       attack: p.data.stats[1].base_stat,
       defense: p.data.stats[2].base_stat,

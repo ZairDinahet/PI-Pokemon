@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from 'react-router-dom';
+import { useHistory, NavLink } from 'react-router-dom';
 import { postPokemon, getAllTypes } from '../../redux/actions';
+import profesor from '../../Img/oak.png'
 import './Form.css'
 
 
@@ -79,7 +80,7 @@ function CreatePokemon () {
       img: "",
       types: [],
     })
-    history.push("/")
+    history.push("/pokemons")
   }
 
   const handleSelect = (e) => {
@@ -114,56 +115,76 @@ function CreatePokemon () {
 
   return (
     <div className='form_container'>
-      <h3>New Pokemon</h3>
+      <NavLink to = '/pokemons' className = 'link-back-form'>
+        Return to Homepage 
+      </NavLink>
+      <h3 className='title-create'>Create your Pokemon</h3>
       <form className='form'  onSubmit={e => handleSubmit(e)}>
 
-        <label htmlFor="name">Name:</label>
-        <input type="text" name = "name" placeholder='Name' value = {form.name} onChange = {e => handleChange(e)}/>
+        <label htmlFor="name">
+          Name <input type="text" name = "name" placeholder='Name' value = {form.name} onChange = {e => handleChange(e)} className = 'input-form'/>
         {error.name && (<p className="danger">{error.name}</p>)} 
+        </label>
         
-        <label htmlFor="hp">Hp:</label>
-        <input type="text" name = "hp" placeholder='1 - 250' value = {form.hp} onChange = {e => handleChange(e)}/>
+        
+        <label htmlFor="hp">
+          Hp <input type="text" name = "hp" placeholder='1 - 250' value = {form.hp} onChange = {e => handleChange(e)} className = 'input-form'/>
         {error.hp && (<p className="danger">{error.hp}</p>)} 
+        </label>
+        
 
-        <label htmlFor="">Attack:</label>
-        <input type="text" name = "attack" placeholder='1 - 250' value = {form.attack} onChange = {e => handleChange(e)}/>
+        <label htmlFor="">
+          Attack <input type="text" name = "attack" placeholder='1 - 250' value = {form.attack} onChange = {e => handleChange(e)} className = 'input-form'/>
         {error.hp && (<p className="danger">{error.hp}</p>)} 
+        </label>
+        
 
-        <label htmlFor="">Defense:</label>
-        <input type="text" name = "defense" placeholder='1 - 250' value = {form.defense} onChange = {e => handleChange(e)}/>
+        <label htmlFor="">
+          Defense <input type="text" name = "defense" placeholder='1 - 250' value = {form.defense} onChange = {e => handleChange(e)} className = 'input-form'/>
         {error.defense && (<p className="danger">{error.defense}</p>)} 
+        </label>
+        
 
-        <label htmlFor="">Speed:</label>
-        <input type="text" name = "speed" placeholder='10 - 250' value = {form.speed} onChange = {e => handleChange(e)}/>
+        <label htmlFor="">
+          Speed <input type="text" name = "speed" placeholder='10 - 250' value = {form.speed} onChange = {e => handleChange(e)} className = 'input-form'/>
         {error.speed && (<p className="danger">{error.speed}</p>)} 
+          </label>
+        
 
-        <label htmlFor="">Height(kg):</label>
-        <input type="text" name = "height" value = {form.height} onChange = {e => handleChange(e)}/>
+        <label htmlFor="">
+          Height <small>(kg)</small> <input type="text" name = "height" value = {form.height} onChange = {e => handleChange(e)} className = 'input-form'/>
+        </label>
+        
 
-        <label htmlFor="">Weight(cm):</label>
-        <input type="text" name = "weight" value = {form.weight} onChange = {e => handleChange(e)}/>
+        <label htmlFor="">
+          Weight <small>(cm)</small> <input type="text" name = "weight" value = {form.weight} onChange = {e => handleChange(e)} className = 'input-form'/>
+        </label>
+        
 
-        <label htmlFor="">Imagen:</label>
-        <input type="text" name = "img" placeholder='URL' value = {form.img} onChange = {e => handleChange(e)}/>
+        <label htmlFor="">
+          Image <input type="text" name = "img" placeholder='URL' value = {form.img} onChange = {e => handleChange(e)} className = 'input-form'/>
+        </label>
 
         <select name="" id="" onChange={e => handleSelect(e)}>
           <option value="None">Type</option>
           {types.map(t => 
-            <option value={t.name} key = {t.id}>{t.name}</option>
+            <option value={t.name} key = {t.id}>{t.name[0].toUpperCase() +  t.name.slice(1)}</option>
             )}
         </select>
         {error.types && (<p className="danger">{error.types}</p>)} 
 
-          <button type='submit' disabled = {validateButton}> Create </button>
-
-          <ul>
+          <button type='submit' disabled = {validateButton} className = 'button-create'> Create </button>
+          
+          <ul >
             {form.types.map(t =>            
-              <li>
-                {t}
-                <button onClick={() => handleDeleteType(t)} >x</button>
+              <li className='list-types'>
+                {t[0].toUpperCase() +  t.slice(1)}
+                <button onClick={() => handleDeleteType(t)} className ='bottom-delete'>x</button>
               </li>
             )}
           </ul>
+        
+        <img src={profesor} alt="Profesor Oak" className='profesor'/>
       </form>
     </div>
 

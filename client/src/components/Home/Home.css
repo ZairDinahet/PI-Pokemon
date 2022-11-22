@@ -1,7 +1,49 @@
-.container-home {
+.container-cards {
   width: 98vw;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
   margin-top: 30px;
+  margin-bottom: 0px;
+  text-decoration: none;
+}
+
+
+.NavBar {
+  background-color: rgba(0, 66, 68, 1);
+  height: 80px;
+  /* display: flex;
+  justify-content: center; */
+}
+/* .navbar{
+  display: flex;
+  justify-content: space-between;
+  padding: 0 125px;
+  align-items: center;
+  color: white;
+} */
+
+.container-filters {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.item-filter {
+  margin: 10px;
+  height: 30px;
+  width: 100px;
+  border: none;
+  border-radius: 30px;
+}
+
+.item-filter:hover {
+  color: white;
+  background-color: gray;
+  transition: all 0.5s;
+}
+
+.item-cards{
+  text-decoration: none;
+  text-decoration: bold;
+  
 }

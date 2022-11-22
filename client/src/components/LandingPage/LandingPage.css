@@ -1,0 +1,23 @@
+.container-landing{
+  box-sizing: border-box;
+  position: relative;
+}
+
+.landing {
+  object-fit: cover;
+}
+
+.button-landing {
+  background-color: gray;
+  color: white;
+  width: 150px;
+  border-radius: 50px;
+  position: relative;
+  bottom: 200px;
+}
+
+.button-landing:hover {
+  background: black;
+  color: white;
+  transition: all 0.5s;
+}
