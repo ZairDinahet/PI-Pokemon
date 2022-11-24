@@ -32,7 +32,6 @@
 }
 
 .link-back-detail{
-  box-shadow: 0 2px 2px 2px rgba(0,0,0,0.2);
   font-family: "Rubik", sans-serif;
   width: 160px;
   height: 90px;
@@ -40,13 +39,56 @@
   background-color: gray;
   color: white;
   border-radius: 50px;
+  box-shadow: 0 2px 2px 2px rgba(0,0,0,0.2);
   text-decoration: none;
   position: relative;
   top: 790px;
   /* right: 750px; */
 }
 
+.link-edit {
+  font-family: "Rubik", sans-serif;
+  width: 130px;
+  height: 20px;
+  padding: 10px;
+  margin: 0px;
+  background-color: gray;
+  color: white;
+  border-radius: 50px;
+  box-shadow: 0 2px 2px 2px rgba(0,0,0,0.2);
+  text-decoration: none;
+  position: relative;
+  right: 120px;
+  top: 327px;
+}
+.button-delete {
+  font-family: "Rubik", sans-serif;
+  font-size: 16px;
+  width: 160px;
+  height: 39px;
+  padding: 10px;
+  background-color: gray;
+  color: white;
+  box-shadow: 0 2px 2px 2px rgba(0,0,0,0.2);
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  position: relative;
+  left: 150px;
+  top: 328px;
+}
 .link-back-detail:hover {
+  background-color: rgba(43, 43, 43, 1);
+  transition: all 0.5s;
+}
+
+.link-edit:hover {
+  background-color: rgba(43, 43, 43, 1);
+  transition: all 0.5s;
+}
+
+.button-delete:hover {
   background-color: rgba(43, 43, 43, 1);
   transition: all 0.5s;
 }

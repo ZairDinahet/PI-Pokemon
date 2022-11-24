@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, NavLink } from 'react-router-dom';
-import { postPokemon, getAllTypes } from '../../redux/actions';
+import { postPokemon, getAllTypes} from '../../redux/actions';
 import profesor from '../../Img/oak.png'
 import './Form.css'
 
@@ -38,7 +38,7 @@ function CreatePokemon () {
     types: [],
   })
 
-  const [error, setError] = useState({});
+  const [error, setErrors] = useState({});
 
   
   const dispatch = useDispatch();
@@ -48,25 +48,17 @@ function CreatePokemon () {
 
   useEffect(() => {
     dispatch(getAllTypes())
-    setError(validate({
+  }, [dispatch])
+
+  useEffect(() => {
+    setErrors(validate({
       ...form
     }))
-  }, [dispatch, form])
+  }, [form])
 
 
-  const handleChange = (e) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value
-    })
-    setError(validate({
-      ...form,
-      [e.target.name]: e.target.value
-    }))
-  }
-
+  
   const handleSubmit = (e) => {
-    console.log(form);
     e.preventDefault();
     dispatch(postPokemon(form));
     setForm({
@@ -80,7 +72,18 @@ function CreatePokemon () {
       img: "",
       types: [],
     })
-    history.push("/pokemons")
+    history.push("/pokemons");
+  }
+
+  const handleChange = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value
+    })
+    setErrors(validate({
+      ...form,
+      [e.target.name]: e.target.value
+    }))
   }
 
   const handleSelect = (e) => {
@@ -99,14 +102,13 @@ function CreatePokemon () {
   }
 
   const validateButton = 
-  !(
-    form.name.length &&
+  !(form.name.length &&
     form.hp.length &&
     form.attack.length &&
     form.defense.length &&
     form.speed.length &&
-    form.types.length
-  ) ||
+    form.types.length) 
+  ||
   form.hp > 250 ||
   form.attack > 250 ||
   form.defense > 250 ||
@@ -133,44 +135,45 @@ function CreatePokemon () {
         </label>
         
 
-        <label htmlFor="">
+        <label htmlFor="attack">
           Attack <input type="text" name = "attack" placeholder='1 - 250' value = {form.attack} onChange = {e => handleChange(e)} className = 'input-form'/>
         {error.hp && (<p className="danger">{error.hp}</p>)} 
         </label>
         
 
-        <label htmlFor="">
+        <label htmlFor="defense">
           Defense <input type="text" name = "defense" placeholder='1 - 250' value = {form.defense} onChange = {e => handleChange(e)} className = 'input-form'/>
         {error.defense && (<p className="danger">{error.defense}</p>)} 
         </label>
         
 
-        <label htmlFor="">
+        <label htmlFor="speed">
           Speed <input type="text" name = "speed" placeholder='10 - 250' value = {form.speed} onChange = {e => handleChange(e)} className = 'input-form'/>
         {error.speed && (<p className="danger">{error.speed}</p>)} 
           </label>
         
 
-        <label htmlFor="">
+        <label htmlFor="height">
           Height <small>(kg)</small> <input type="text" name = "height" value = {form.height} onChange = {e => handleChange(e)} className = 'input-form'/>
         </label>
         
 
-        <label htmlFor="">
+        <label htmlFor="weight">
           Weight <small>(cm)</small> <input type="text" name = "weight" value = {form.weight} onChange = {e => handleChange(e)} className = 'input-form'/>
         </label>
         
 
-        <label htmlFor="">
+        <label htmlFor="img">
           Image <input type="text" name = "img" placeholder='URL' value = {form.img} onChange = {e => handleChange(e)} className = 'input-form'/>
         </label>
 
-        <select name="" id="" onChange={e => handleSelect(e)}>
+        <select  onChange={e => handleSelect(e)}>
           <option value="None">Type</option>
           {types.map(t => 
             <option value={t.name} key = {t.id}>{t.name[0].toUpperCase() +  t.name.slice(1)}</option>
             )}
         </select>
+
         {error.types && (<p className="danger">{error.types}</p>)} 
 
           <button type='submit' disabled = {validateButton} className = 'button-create'> Create </button>

@@ -1,6 +1,7 @@
 const { Router } = require('express');
 const getAllPokemons = require('../controllers/getPokemons');
 const postPokemon = require('../controllers/postPokemon');
+const editPokemon = require('../controllers/editPokemon')
 const {Pokemon, Type} = require('../db');
 // traerme mis funciones controladoras get de la carpeta controllers
 const router = Router();
@@ -45,7 +46,7 @@ router.get('/:id', async (req, res) => {
 
 // Creo mi pokemon y hago mi relacion con la tabla type 
 router.post('/', async (req, res) => {
-  const { name, hp, attack, defense, speed, height, weight, types, img } = req.body;
+  const { name } = req.body;
   if(!name) return res.status(400).send('Mandatory data missing')
   
   try {
@@ -79,5 +80,37 @@ router.post('/', async (req, res) => {
     res.status(400).send(error);
   }
 })
+
+//elimino un pokemon de mi base datos
+router.delete('/:id', async (req, res) => {
+  const { id } = req.params;
+  try {
+    const pokeDelete = await Pokemon.findByPk(id)
+    if(pokeDelete) {
+      pokeDelete.destroy();
+      return res.status(200).send('Pokemon removed successfully');
+    } else {
+      return res.status(404).send('The pokemon you want to eliminate does not exist')
+    }
+  } catch (error) {
+    res.status(400).send(error)
+  }
+})
+
+router.put('/edit/:id', async (req, res) => {
+  const { id } = req.params;
+  const { name } = req.body;
+  if(!name) return res.status(400).send('Mandatory data missing');
+
+  try {
+
+    await editPokemon(id, req.body);
+    res.status(200).send("Pokemon successfully updated");
+
+  } catch (error) {
+    res.status(400).send(error)
+  }
+})
+
 
 module.exports = router

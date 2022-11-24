@@ -20,7 +20,10 @@ function Error ( ) {
       <img src={wobbuffet} alt="wobbuffet" className='wobbuffet' />  
       <div className='text-error'>
         <h1>NOOOO!</h1>
-        <h1>What you were looking for was not found!</h1>
+        <h1>What you were looking for was not found!
+          <br/>
+          Or the name of the pokemon you created is already taken!
+        </h1>
         <button onClick ={(e) => handleHome(e)} className = 'button-back-home'>Return to Homepage</button>
       </div>
     </div>

@@ -5,8 +5,8 @@ function Paginado ({pokemonPerPage, pokemons, paginado}){
   const pages = [];
   const numbers = Math.ceil(pokemons/pokemonPerPage)
 
-  for (let i = 0; i < numbers; i++) {
-    pages.push(i + 1);
+  for (let i = 1; i <= numbers; i++) {
+    pages.push(i);
   }
 
   return (

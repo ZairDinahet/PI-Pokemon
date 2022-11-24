@@ -8,7 +8,7 @@ function LandingPage () {
   return (
     <div className='container-landing'>
       <img src={landing} alt="" className='landing' />
-      <NavLink to = '/pokemons'>
+      <NavLink to = '/pokemons' className="link-tohome">
         <button className='button-landing'>
           <h3>Start Pokedex</h3> 
         </button>

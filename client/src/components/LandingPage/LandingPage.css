@@ -7,13 +7,22 @@
   object-fit: cover;
 }
 
+
+.link-tohome {
+  display: flex;
+  text-decoration: none;
+
+}
+
 .button-landing {
   background-color: gray;
   color: white;
   width: 150px;
   border-radius: 50px;
-  position: relative;
-  bottom: 200px;
+  position: absolute;
+  cursor: pointer;
+  bottom: 150px;
+  left: 800px
 }
 
 .button-landing:hover {

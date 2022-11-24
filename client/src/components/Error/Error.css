@@ -5,13 +5,14 @@
 
 
 .text-error {
-  font-size: 15px;
+  font-size: 12px;
 }
 
 .button-back-home {
   border-radius: 50px;
   background-color: gray;
   color: white;
+  cursor: pointer;
   border: none;
   width: 150px;
   height: 35px;

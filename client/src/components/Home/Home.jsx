@@ -21,13 +21,14 @@ const indexOfLastPokemon = currentPage * pokemonPerPage;
 const indexOfFirstPokemon = indexOfLastPokemon - pokemonPerPage;
 const currentPokemons = pokemons.slice(indexOfFirstPokemon, indexOfLastPokemon);
 
+const paginado = (pageNumber) => setCurrentPage(pageNumber);
+
+
 useEffect(() => {
   dispatch(getAllPokemons())
   dispatch(getAllTypes())
 }, [dispatch])
 
-
-const paginado = (pageNumber) => setCurrentPage(pageNumber);
 
 const handleFilterByTypes = (e) =>{
   e.preventDefault()
@@ -80,16 +81,19 @@ const handleFilterByOrder = (e) => {
         {error? <Error/> :
           <>
             <div className= "container-cards">
-            {currentPokemons.length? 
-            (currentPokemons.map(p => 
-            <NavLink to ={/pokemons/+ p.id} key= {p.id} className = "item-cards">
-              <Card key = {p.id} name = {p.name} type = {p.types.map(t => t[0].toUpperCase() +  t.slice(1)).join(' - ')} img = {p.img} />
-            </NavLink>)) :
-            (<div>
-              <img src={loading} alt="Ganger" />
-            </div>)
-            }
+
+              {currentPokemons.length? 
+              (currentPokemons.map(p => 
+              <NavLink to ={/pokemons/+ p.id} key= {p.id} className = "item-cards">
+                <Card key = {p.id} name = {p.name} type = {p.types.map(t => t[0].toUpperCase() +  t.slice(1)).join(' - ')} img = {p.img} />
+              </NavLink>)) 
+              :
+              (<div>
+                <img src={loading} alt="Ganger" />
+              </div>)}
+
             </div>
+            
             <Paginado pokemonPerPage={pokemonPerPage} pokemons = {pokemons.length} paginado = {paginado}/>
           </>
         }

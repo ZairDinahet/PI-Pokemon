@@ -1,7 +1,7 @@
 import React from "react";
 import './Card.css'
 
-function Card ({name, type, img, hp}) {
+function Card ({name, type, img}) {
   return (
     <div className="sub-container-card">
       <div className="card">

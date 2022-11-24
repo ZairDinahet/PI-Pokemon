@@ -2,7 +2,10 @@ import {
   GET_ALL_POKEMONS,
   GET_TYPES,
   GET_NAME,
+  GET_DETAILS_STATE,
   GET_DETAILS,
+  POST_POKEMON,
+  DELETE_POKEMON,
   FILTER_TYPES,
   FILTER_ORIGIN,
   FILTER_ORDER,
@@ -39,8 +42,12 @@ function rootReducer (state = initialState, action){
         ...state,
         pokemons: action.payload,
       }
-    
     case GET_DETAILS:
+      return {
+        ...state,
+        detail: action.payload
+      }
+    case GET_DETAILS_STATE:
       const filterId = [...state.pokemonsCopy]
       const pokemon = filterId.filter( (p) => p.id.toString() === action.payload)
       return {
@@ -69,36 +76,35 @@ function rootReducer (state = initialState, action){
       if(action.payload === 'asc') pokemones.sort((a, b) => { 
           const aPokemon =  a.name.toLowerCase();
           const bPokemon =  b.name.toLowerCase()
-          if(aPokemon > bPokemon) return 1;
           if(aPokemon < bPokemon) return -1;
+          if(aPokemon > bPokemon) return 1;
           return 0;
         });
       if(action.payload === 'desc') pokemones.sort((a, b) => { 
         const aPokemon =  a.name.toLowerCase();
         const bPokemon =  b.name.toLowerCase()
-        if(aPokemon > bPokemon) return -1;
         if(aPokemon < bPokemon) return 1;
+        if(aPokemon > bPokemon) return -1;
         return 0;
         })
-    //   if(action.payload === 'asc') pokemones.sort((a, b) => { 
-
-    //     if(a.name > b.name) return 1;
-    //     if(a.name < b.name) return -1;
-    //     return 0;
-    //   });
-    // if(action.payload === 'desc') pokemones.sort((a, b) => { 
-
-    //   if(a.name > b.name) return -1;
-    //   if(a.name < b.name) return 1;
-    //   return 0;
-    //   })
+        
       if(action.payload === 'strong') pokemones.sort((a, b) => b.attack - a.attack)
       if(action.payload === 'weak') pokemones.sort((a, b) => a.attack - b.attack)
       return{
         ...state,
         pokemons: pokemones
       }
-
+    
+    case POST_POKEMON:
+      return {
+          ...state,
+      };
+    
+    case DELETE_POKEMON:
+      return {
+          ...state,
+      };
+  
     case SET_ERROR:
       return {
         ...state,

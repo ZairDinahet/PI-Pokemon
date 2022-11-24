@@ -1,4 +1,4 @@
-.form_container{
+.form_container-edit{
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -8,7 +8,7 @@
   /* text-decoration: none; */
 }
 
-.form{
+.form-edit{
   background-color: rgba(200, 199, 199, 1);
   display: flex;
   flex-direction: column;
@@ -22,7 +22,7 @@
   box-shadow: 0 2px 2px 2px rgba(0,0,0,0.5);
 }
 
-.input-form {
+.input-form-edit {
   height: 25px;
   margin: 5px;
   border: 1px solid black;
@@ -55,7 +55,7 @@ select{
 }
 
 
-.link-back-form{
+.link-back-form-edit{
   font-family: "Rubik", sans-serif;
   font-size: 15px;
   width: 160px;
@@ -72,12 +72,12 @@ select{
 
 }
 
-.link-back-form:hover {
+.link-back-form-edit:hover {
   background-color: rgba(43, 43, 43, 1);
   color: white;
   transition: all 0.5s;
 }
-.button-create{
+.button-edit{
   color: white;
   width: 150px;
   padding: 10px;
@@ -89,16 +89,17 @@ select{
   font-weight: bold
 }
 
-.button-create:hover {
+.button-edit:hover {
   background-color: rgba(43, 43, 43, 1);
   transition: all 0.5s;
 }
 
-.profesor {
-  width: 360px;
-  height: 650px;
+.red-img {
+  width: 260px;
+  height: 550px;
   position: absolute;
-  right: 390px;
+  right: 430px;
+  top: 170px;
 }
 
 .list-types {

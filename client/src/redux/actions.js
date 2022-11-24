@@ -3,14 +3,15 @@ import axios from 'axios';
 export const GET_ALL_POKEMONS = "GET_ALL_POKEMONS";
 export const GET_TYPES = "GET_TYPES";
 export const GET_NAME = "GET_NAME";
+export const GET_DETAILS_STATE = "GET_DETAILS_STATE";
 export const GET_DETAILS = "GET_DETAILS";
 export const POST_POKEMON = "POST_POKEMON";
+export const DELETE_POKEMON = "DELETE_POKEMON";
+export const PUT_POKEMON = "PUT_POKEMON";
 export const FILTER_TYPES = "FILTER_TYPES";
 export const FILTER_ORIGIN = "FILTER_ORIGIN";
 export const FILTER_ORDER = "FILTER_ORDER";
 export const SET_ERROR = "SET_ERROR";
-
-export const RESET = "RESET";
 
 
 
@@ -65,12 +66,6 @@ export const getPokemonByName = (name) => {
   }
 }
 
-export const getPokemonById = (id) => {
-      return {
-        type: GET_DETAILS,
-        payload: id,
-      }
-}
 
 export const postPokemon = (payload) => {
   return async function(dispatch) {
@@ -80,11 +75,66 @@ export const postPokemon = (payload) => {
     } catch (error) {
       return dispatch({
         type: SET_ERROR,
+        payload: true,
       })
     }
   }
   
 }
+
+export const deletePokemon = (idPokemon) => {
+  return async function (dispatch){
+    try {
+      await axios.delete(`http://localhost:3001/pokemons/${idPokemon}`);
+      
+    } catch (error) {
+      return dispatch({
+        type: SET_ERROR,
+        payload: true,
+      })
+    }
+  }
+}
+
+export const putPokemon = (idPokemon, data) => {
+  return async function (dispatch){
+    try {
+      await axios.put(`http://localhost:3001/pokemons/edit/${idPokemon}`, data);
+      
+    } catch (error) {
+      return dispatch({
+        type: SET_ERROR,
+        payload: true,
+      })
+    }
+  }
+}
+
+export const getPokemonDetail = (id) => {
+  return async function(dispatch) {
+    try {
+      const pokemonDetail = await axios.post(`http://localhost:3001/pokemons/${id}`)
+      return dispatch({
+        type: GET_DETAILS,
+        payload: pokemonDetail.data
+      })
+    } catch (error) {
+      return dispatch({
+        type: SET_ERROR,
+        payload: true,
+      })
+    }
+  }
+  
+}
+
+export const getPokemonDetailState = (id) => {
+  return {
+        type: GET_DETAILS_STATE,
+        payload: id,
+      }
+}
+
 export const filterByTypes = (type) => {
   return {
     type: FILTER_TYPES,
@@ -112,9 +162,7 @@ export const setError = (payload) => {
     payload: payload,
   }
 }
-export const resetPokemons = () => {
-  return {
-    type: RESET,
-  }
-}
+
+
+
 
