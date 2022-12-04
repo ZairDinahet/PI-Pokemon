@@ -87,11 +87,12 @@ function CreatePokemon () {
   }
 
   const handleSelect = (e) => {
-    setForm({
-      ...form,
-      types: [...form.types, e.target.value]
-
-    })
+  if(form.types.length < 2) {
+      setForm({
+        ...form,
+        types: [...form.types, e.target.value]
+      })
+    }
   }
 
   const handleDeleteType = (type) => {
